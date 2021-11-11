@@ -3,6 +3,7 @@ import React, { Component} from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar/SearchBar';
 import DisplayVideo from './DisplayVideo/DisplayVideo';
+import <RelatedVideos></RelatedVideos> from './RelatedVideos/RelatedVideos';
 
 class App extends Component {
     constructor(props) {
