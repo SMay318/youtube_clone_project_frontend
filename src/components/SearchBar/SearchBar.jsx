@@ -1,13 +1,13 @@
-import React from "react";
-import { Input } from 'semantic-ui-react'
+import React, {Component} from "react";
 
-class SearchBar extends React.Component {
+
+class SearchBar extends Component {
     state = {
         searchTerm: ''
     };
     handleChange = (event) => {
         this.setState({
-            searchTerm: event.target.value
+            [event.target.name]: event.target.value
         });
     };
     handleSubmit = event => {
@@ -18,8 +18,9 @@ class SearchBar extends React.Component {
 render() {
     return (
         <form onSubmit={this.handleSubmit}>
-            <label htmlFor="videoSearch">Enter YouTube Video Search</label>
-            <Input action='Search' onChange={this.handleChange} name='videoSearch' type="text" value={this.state.searchTerm}/>
+            <label htmlFor="searchTerm">Enter YouTube Video Search:</label>
+            <input action='Search' onChange={this.handleChange} name='searchTerm' type="text" value={this.state.searchTerm}/>
+            <button type='submit'>Search</button>
         </form>
         )
     }
