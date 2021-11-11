@@ -1,28 +1,27 @@
 import React from "react";
-import useForm from "../UseForm/UseForm";
+import { Input } from 'semantic-ui-react'
 
-const SearchBar = ({ onFormSubmit}) => {
-    const [term, setTerm] = useState("");
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        onFormSubmit(term);
+class SearchBar extends React.Component {
+    state = {
+        searchTerm: ''
     };
+    handleChange = (event) => {
+        this.setState({
+            searchTerm: event.target.value
+        });
+    };
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.getVideo(this.state.searchTerm);
+    }
 
+render() {
     return (
-        <div className="search-bar ui">
-            <form className="ui form" onSubmit={onSubmit}>
-                <div className="field">
-                    <label>Video Search</label>
-                    <input
-                        type="text"
-                        value={term}
-                        onChange={(e) => setTerm(e.target.value)}
-                    />
-                </div>
-            </form>
-        </div>
-    );
-};
-
-export default SearchBar;
+        <form onSubmit={this.handleSubmit}>
+            <label htmlFor="videoSearch">Enter YouTube Video Search</label>
+            <Input action='Search' onChange={this.handleChange} name='videoSearch' type="text" value={this.state.searchTerm}/>
+        </form>
+        )
+    }
+}
+ export default SearchBar;
