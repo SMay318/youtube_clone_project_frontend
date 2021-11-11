@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
-import Iframe from './components/iframe.js';
 
-class DisplayViedo extends Component {
+class DisplayVideo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            src: "https://www.youtube.com/embed/"+ videoId + "/"
-        };
+        this.state = { 
+            videoId: ''}
     }
 
     render() {
         return (
-            <div className="App">
-                <h1>Video</h1>
-                <Iframe source={this.state.src} />
+            <div>
+                <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src={`https://www.youtube.com/embed/${this.props.videoId}`}>
+                    </iframe>
             </div>
         );
     }
 }
 
-export default App;
+export default DisplayVideo;
