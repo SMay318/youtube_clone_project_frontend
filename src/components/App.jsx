@@ -29,6 +29,7 @@ class App extends Component {
         return ( 
             <div>
                 <SearchBar getVideo={this.getVideo} />
+                <DisplayVideo />
             </div>
          );
     }
