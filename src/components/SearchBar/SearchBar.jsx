@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import { Input } from 'semantic-ui-react'
+import { Component } from 'react';
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
     state = {
         searchTerm: ''
     };
