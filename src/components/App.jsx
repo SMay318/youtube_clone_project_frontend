@@ -1,33 +1,37 @@
 import { googleAPIKey } from '../keys';
-import React, { useEffect, useState } from 'react';
+import React, { Component} from 'react';
 import axios from 'axios';
+import SearchBar from './SearchBar/SearchBar';
 
-const App = (props) => {
-    const [videos, setVideos] = useState([]);
-    const [searchVideo, searchVideos] = useState('');
-
-    async function fetchVideos(){
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchVideo}&type=video&key=${googleAPIKey}`);
-        setVideos(response.data);
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            videos:[]
+         }
     }
 
-    useEffect(() => {
-        let mounted = true;
-        if(mounted){
-            fetchVideos();
-        }
-        return () => mounted = false;
-    }, [])
+    componentDidMount(){
+        this.getVideo();
 
-    
+    }
 
-    return(
-        <div>
-             
-        </div>
-    )
-
-       
-    
+    getVideo = async (searchTerm) => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&key=${googleAPIKey}`)
+        this.setState({
+            videos: response.data
+        })
+    }
+        
+    render() { 
+        return ( 
+            <div>
+                <SearchBar getVideo={this.getVideo} />
+            </div>
+         );
+    }
 }
+ 
 export default App;
+
+// `https://www.googleapis.com/youtube/v3/search?q=${searchVideo}&type=video&key=${googleAPIKey}`
