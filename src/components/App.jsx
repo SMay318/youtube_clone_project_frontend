@@ -7,7 +7,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            videos:[]
+            videos:[],
+            videoId: [{}]
          }
     }
 
@@ -19,7 +20,8 @@ class App extends Component {
     getVideo = async (searchTerm) => {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&key=${googleAPIKey}`)
         this.setState({
-            videos: response.data
+            videos: response.data,
+            videoId: response.data.items[0].id.vidoeId
         })
     }
         
