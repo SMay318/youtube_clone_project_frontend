@@ -2,13 +2,15 @@ import { googleAPIKey } from '../keys';
 import React, { Component} from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar/SearchBar';
+import DisplayVideo from './DisplayVideo/DisplayVideo';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            relatedVideos: [],
             videos:[],
-            videoId: [{}]
+            videoId: ''
          }
     }
 
@@ -20,16 +22,22 @@ class App extends Component {
     getVideo = async (searchTerm) => {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&key=${googleAPIKey}`)
         this.setState({
-            videos: response.data,
-            videoId: response.data.items[0].id.vidoeId
+            videos: response.data.items,
+            videoId: response.data.items[0].id.videoId
         })
+        this.getRelatedVideos(response.data.items[0].id.videoId)
+    }
+
+    getRelatedVideos = async (videoId) => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${videoId}&type=video&key=${googleAPIKey}`)
     }
         
     render() { 
         return ( 
             <div>
                 <SearchBar getVideo={this.getVideo} />
-                <DisplayVideo />
+                <DisplayVideo videoId = {this.state.videoId}/>
+                <RelatedVideos videos={this.state.relatedVideos} />
             </div>
          );
     }
@@ -37,4 +45,3 @@ class App extends Component {
  
 export default App;
 
-// `https://www.googleapis.com/youtube/v3/search?q=${searchVideo}&type=video&key=${googleAPIKey}`
