@@ -16,7 +16,7 @@ class App extends Component {
     }
 
     componentDidMount(){
-        this.getVideo();
+        this.getVideo('dogs');
         
 
     }
@@ -31,12 +31,12 @@ class App extends Component {
         this.setState({
             videos: response.data.items,
             videoId: response.data.items[0].id.videoId
-        })
-        this.getRelatedVideos(response.data.items[1].id.videoId)
+        },() => this.getRelatedVideos())
+        // this.getRelatedVideos(response.data.items[1].id.videoId)
     }
 
-    getRelatedVideos = async (VideoId) => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${VideoId}&part=snippet&ype=video&key=${googleAPIKey}`)
+    getRelatedVideos = async () => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${this.state.videoId}&part=snippet&type=video&key=${googleAPIKey}`)
         console.log(response.data)
         this.setState({
             relatedVideos: response.data.items
