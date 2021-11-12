@@ -17,9 +17,13 @@ class App extends Component {
 
     componentDidMount(){
         this.getVideo();
+        
 
     }
-    changeVideo=()=>{
+    changeVideo = (selectVideo) => {
+        this.setState({
+            
+        })
 
     }
 
@@ -46,7 +50,7 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId}/>
-                <RelatedVideos relatedVideos={this.state.relatedVideos} />
+                <RelatedVideos relatedVideos={this.state.relatedVideos} selectVideo={this.changeVideo}/>
             </div>
          );
     }
