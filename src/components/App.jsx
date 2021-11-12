@@ -32,11 +32,11 @@ class App extends Component {
             videos: response.data.items,
             videoId: response.data.items[0].id.videoId
         })
-        this.getRelatedVideos(response.data.items[1].id.videoId)
+        this.getRelatedVideos(response.data.items[0].id.videoId)
     }
 
     getRelatedVideos = async (VideoId) => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${VideoId}&part=snippet&ype=video&key=${googleAPIKey}`)
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${VideoId}&part=snippet&type=video&key=${googleAPIKey}`)
         console.log(response.data)
         this.setState({
             relatedVideos: response.data.items
@@ -49,7 +49,7 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId}/>
-                <RelatedVideos relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
+                <RelatedVideos videoId={this.state.videoId} relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
             </div>
          );
     }
