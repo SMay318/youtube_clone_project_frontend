@@ -1,31 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class RelatedVideo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            videoId: ''
-        }
-    }
+function RelatedVideo(props){
+   
 
-    render() {
+
         return (
+         
             <div>
-                <iframe id="ytplayer1" type="text/html" width="100" height="60"
-                    src={`https://www.youtube.com/embed/${this.props.videoId}`}>
-                    </iframe>
-                 <iframe id="ytplayer2" type="text/html" width="100" height="60"
-                    src={`https://www.youtube.com/embed/${this.props.videoId}`}>
-                    </iframe>
-                <iframe id="ytplayer3" type="text/html" width="100" height="60"
-                    src={`https://www.youtube.com/embed/${this.props.videoId}`}>
-                    </iframe>
-                <iframe id="ytplayer4" type="text/html" width="100" height="60"
-                    src={`https://www.youtube.com/embed/${this.props.videoId}`}>
-                    </iframe>
+               
+              {props.relatedVideos.map((video) =>
+                  <div >
+                    <img src={video.snippet.thumbnails.default.url}></img>
+                 
+                    <div>{video.snippet.title}</div>
+                   </div>
+              )}
             </div>
         );
-    }
+    
 }
 
 export default RelatedVideo;
