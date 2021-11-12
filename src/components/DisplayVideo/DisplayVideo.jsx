@@ -5,15 +5,18 @@ class DisplayVideo extends Component {
         super(props);
         this.state = { 
             videoId: ''
+
         }
     }
 
     render() {
         return (
             <div>
+                <h1>{this.props.title}</h1>
                 <iframe id="ytplayer" type="text/html" width="640" height="360"
                     src={`https://www.youtube.com/embed/${this.props.videoId}`}>
-                    </iframe>
+                    </iframe> 
+                <h4>{this.props.description}</h4>
             </div>
         );
     }
