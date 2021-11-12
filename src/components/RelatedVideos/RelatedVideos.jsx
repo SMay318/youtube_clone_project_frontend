@@ -9,7 +9,7 @@ function RelatedVideo(props){
 
         return (
          
-            <div>
+            <div className='relatedVideo'>
                
               {props.relatedVideos.map((video) => {
                 if (video.snippet){
