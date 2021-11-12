@@ -3,7 +3,7 @@ import React, { Component} from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar/SearchBar';
 import DisplayVideo from './DisplayVideo/DisplayVideo';
-import <RelatedVideos></RelatedVideos> from './RelatedVideos/RelatedVideos';
+import RelatedVideos from './RelatedVideos/RelatedVideos';
 
 class App extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class App extends Component {
             videos: response.data.items,
             videoId: response.data.items[0].id.videoId
         })
-        this.getRelatedVideos(response.data.items[0].id.videoId)
+        this.getRelatedVideos(response.data.items[1].id.videoId)
     }
 
     getRelatedVideos = async (videoId) => {
