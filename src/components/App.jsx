@@ -20,11 +20,18 @@ class App extends Component {
         
 
     }
+<<<<<<< HEAD
     changeVideo = (selectVideo) => {
         this.setState({
             
         })
 
+=======
+    changeVideo=(newVideoId)=>{
+        this.setState({
+            videoId: newVideoId
+        })
+>>>>>>> 9758e95438f9aaf4d709a63c4d253f06fbc36631
     }
 
     getVideo = async (searchTerm) => {
@@ -33,7 +40,7 @@ class App extends Component {
             videos: response.data.items,
             videoId: response.data.items[0].id.videoId
         })
-        this.getRelatedVideos(response.data.items[0].id.videoId)
+        this.getRelatedVideos(response.data.items[1].id.videoId)
     }
 
     getRelatedVideos = async (VideoId) => {
@@ -50,7 +57,11 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId}/>
+<<<<<<< HEAD
                 <RelatedVideos relatedVideos={this.state.relatedVideos} selectVideo={this.changeVideo}/>
+=======
+                <RelatedVideos relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
+>>>>>>> 9758e95438f9aaf4d709a63c4d253f06fbc36631
             </div>
          );
     }
