@@ -19,8 +19,10 @@ class App extends Component {
         this.getVideo();
 
     }
-    changeVideo=()=>{
-
+    changeVideo=(newVideoId)=>{
+        this.setState({
+            videoId: newVideoId
+        })
     }
 
     getVideo = async (searchTerm) => {
@@ -46,7 +48,7 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId}/>
-                <RelatedVideos relatedVideos={this.state.relatedVideos} />
+                <RelatedVideos relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
             </div>
          );
     }

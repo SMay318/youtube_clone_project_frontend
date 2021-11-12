@@ -10,8 +10,9 @@ function RelatedVideo(props){
                
               {props.relatedVideos.map((video) =>
                   <div >
-                    <img src={video.snippet.thumbnails.default.url}></img>
-                 
+                    <span onClick={() => props.changeVideo(video.id.videoId)}>
+                        <img src={video.snippet.thumbnails.default.url}></img>
+                    </span>
                     <div>{video.snippet.title}</div>
                    </div>
               )}
