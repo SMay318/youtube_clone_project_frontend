@@ -3,7 +3,7 @@ import React, { Component} from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar/SearchBar';
 import DisplayVideo from './DisplayVideo/DisplayVideo';
-import <RelatedVideos></RelatedVideos> from './RelatedVideos/RelatedVideos';
+import RelatedVideos from './RelatedVideos/RelatedVideos';
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +19,9 @@ class App extends Component {
         this.getVideo();
 
     }
+    changeVideo=()=>{
+
+    }
 
     getVideo = async (searchTerm) => {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&type=video&key=${googleAPIKey}`)
@@ -29,8 +32,13 @@ class App extends Component {
         this.getRelatedVideos(response.data.items[0].id.videoId)
     }
 
-    getRelatedVideos = async (videoId) => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${videoId}&type=video&key=${googleAPIKey}`)
+    getRelatedVideos = async (VideoId) => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${VideoId}&part=snippet&ype=video&key=${googleAPIKey}`)
+        console.log(response.data)
+        this.setState({
+            relatedVideos: response.data.items
+            
+        })
     }
         
     render() { 
@@ -38,7 +46,7 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId}/>
-                <RelatedVideos videos={this.state.relatedVideos} />
+                <RelatedVideos relatedVideos={this.state.relatedVideos} />
             </div>
          );
     }
