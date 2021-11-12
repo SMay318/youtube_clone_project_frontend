@@ -25,7 +25,7 @@ class App extends Component {
     changeVideo=(newVideoId)=>{
         this.setState({
             videoId: newVideoId
-        })
+        }, () => this.getRelatedVideos())
     }
 
     getVideo = async (searchTerm) => {
