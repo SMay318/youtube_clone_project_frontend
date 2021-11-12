@@ -1,8 +1,11 @@
 import React from 'react';
+import { useEffect } from 'react';
 
 function RelatedVideo(props){
    
-
+    useEffect(()=>{
+        
+    },[props.videoId])
 
         return (
          
