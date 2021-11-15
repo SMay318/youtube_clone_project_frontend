@@ -4,9 +4,15 @@ class Reply extends Component{
     constructor(props){
         super(props)
         this.state = {
+<<<<<<< HEAD
 
             text:"",
             video_id: props.video_id,
+=======
+           
+           reply: '',
+           comment_id: this.props.comment_pk
+>>>>>>> 6a14e289f567f32b1eae23164fbe2d76a5f96c7b
 
         }
     }
