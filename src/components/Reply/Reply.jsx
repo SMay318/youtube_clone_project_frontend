@@ -5,21 +5,12 @@ class Reply extends Component{
         super(props)
         this.state = {
 
-            text:"",
-            video_id: props.video_id,
+           reply: '',
+           comment_id: this.props.comment_pk
 
         }
     }
 
-    componentDidUpdate = (prevState) => {
-        if(
-            this.state.video_id != this.props.video_id
-        ){
-            this.setState({
-                videp_id: this.props.video_id
-            })
-        }
-    }
 
     handleChange = (event) => {
         console.log('hello')

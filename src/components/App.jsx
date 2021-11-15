@@ -4,6 +4,11 @@ import axios from 'axios';
 import SearchBar from './SearchBar/SearchBar';
 import DisplayVideo from './DisplayVideo/DisplayVideo';
 import RelatedVideos from './RelatedVideos/RelatedVideos';
+import Comments from './Comments/Comments';
+import CommentTable from './CommentTable/CommentTable';
+
+
+
 
 class App extends Component {
     constructor(props) {
@@ -13,15 +18,25 @@ class App extends Component {
             videos:[],
             videoId: '',
             title:'',
-            description: ''
+            description: '',
+            comments: [],
+            reply: [],
          }
     }
 
     componentDidMount(){
         this.getVideo('dogs');
+        this.getComments();
+        this.getReplies()
         
 
     }
+
+    setMount(){
+        this.addComment();
+        this.addReply();
+    }
+
     changeVideo=(newVideoId)=>{
         this.setState({
             videoId: newVideoId
@@ -48,12 +63,32 @@ class App extends Component {
             title: response.data.items[0].snippet.title,
             description: response.data.items[0].snippet.description
             
-            
-
-            
         })
     }
-        
+
+    getComments = async () =>{
+        let response = await axios.get('http://127.0.0.1:8000/youtube/');
+        this.setState({
+            comments: response.data
+        });
+    }
+    addComment = async (text) => {
+        let response = await axios.post('http://127.0.0.1:8000/youtube/', text)
+        this.getComments()
+    }
+    
+    getReplies = async () => {
+        let response = await axios.get('http://127.0.0.1:8000/reply/');
+        this.setState({
+            reply: response.data
+        })
+    }
+
+    addReply = async (text) => {
+        let response = await axios.post('http://127.0.0.1:8000/reply/', text);
+        this.getReplies()
+    }
+
     render() { 
         return ( 
             <div>
