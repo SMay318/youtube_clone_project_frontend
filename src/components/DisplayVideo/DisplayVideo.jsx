@@ -11,12 +11,12 @@ class DisplayVideo extends Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.props.title}</h1>
+           <div>
+                <div>{this.props.title}</div>
                 <iframe id="ytplayer" type="text/html" width="640" height="360"
                     src={`https://www.youtube.com/embed/${this.props.videoId}`}>
                     </iframe> 
-                <h4>{this.props.description}</h4>
+                <div>{this.props.description}</div>
             </div>
         );
     }

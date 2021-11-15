@@ -9,7 +9,7 @@ function RelatedVideo(props){
 
         return (
          
-            <div className='relatedVideo'>
+            <div className='relatedVideo' style={{textAlign: 'right'}}>
                
               {props.relatedVideos.map((video) => {
                 if (video.snippet){

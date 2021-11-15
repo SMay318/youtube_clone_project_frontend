@@ -13,15 +13,23 @@ class App extends Component {
             videos:[],
             videoId: '',
             title:'',
-            description: ''
+            description: '',
+            comments: []
          }
     }
 
     componentDidMount(){
         this.getVideo('dogs');
+        this.getCommentx();
         
 
     }
+
+    setMount(){
+        this.addComment();
+    }
+
+    
     changeVideo=(newVideoId)=>{
         this.setState({
             videoId: newVideoId
@@ -43,9 +51,25 @@ class App extends Component {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${this.state.videoId}&part=snippet&type=video&key=${googleAPIKey}`)
         console.log(response.data)
         this.setState({
-            relatedVideos: response.data.items
+            relatedVideos: response.data.items,
+            title: response.data.items[0].snippet.title,
+            description: response.data.items[0].snippet.description
+
             
         })
+    }
+
+    getComments = async () =>{
+        let response = await axios.get('http://127.0.0.1:8000/youtube/');
+        this.setState({
+            comments: response.data
+        });
+
+    }
+
+    addComment = async (text) => {
+        let response = await axios.post('http://127.0.0.1:8000/youtube/', text)
+        this.getComments()
     }
         
     render() { 
