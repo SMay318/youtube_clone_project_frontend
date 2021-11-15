@@ -21,7 +21,7 @@ class Reply extends Component{
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        this.props.createReply(this.state)
+        this.props.newReply(this.state)
     }
 
     render() {

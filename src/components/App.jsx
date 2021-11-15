@@ -84,7 +84,7 @@ class App extends Component {
         this.setState({
             newComment: response.data
         });
-        this.getComments();
+        this.getComments()
     }
     
     getReplies = async () => {
@@ -94,8 +94,12 @@ class App extends Component {
         })
     }
 
-    addReply = async (text) => {
-        let response = await axios.post('http://127.0.0.1:8000/reply/', text);
+    addReply = async (newReply) => {
+        let response = await axios.post('http://127.0.0.1:8000/reply/', newReply);
+        this.getReplies()
+        this.setState({
+            newReply: response.data
+        });
         this.getReplies()
     }
 
@@ -120,7 +124,7 @@ class App extends Component {
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId} title={this.state.title} description={this.state.description} />
                 <Comments newComment={this.addComment} videoId={this.state.videoId}/>
-                <CommentTable comments={this.state.comments} like={this.likes} dislike={this.dislikes} />
+                <CommentTable comments={this.state.comments} like={this.likes} dislike={this.dislikes} reply={this.state.reply} newReply={this.addReply}/>
                 <RelatedVideos videoId={this.state.videoId} relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
                 
                 
