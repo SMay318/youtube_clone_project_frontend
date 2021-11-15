@@ -35,6 +35,8 @@ class App extends Component {
     setMount(){
         this.addComment();
         this.addReply();
+        this.likes();
+        this.dislikes();
     }
 
     changeVideo=(newVideoId)=>{
@@ -87,6 +89,21 @@ class App extends Component {
     addReply = async (text) => {
         let response = await axios.post('http://127.0.0.1:8000/reply/', text);
         this.getReplies()
+    }
+
+    likes = async (comment) => {
+        let updatedComment = comment;
+        updatedComment.likes++;
+        let response = await axios.put('http://127.0.0.1:8000/youtube/'+comment.id+'/', updatedComment);
+        this.getComments()
+
+    }
+
+    dislikes = async (comment) => {
+        let updatedComment = comment;
+        updatedComment.dislikes++;
+        let response = await axios.put('http://127.0.0.1:8000/youtube/'+comment.id+'/', updatedComment);
+        this.getComments()
     }
 
     render() { 
