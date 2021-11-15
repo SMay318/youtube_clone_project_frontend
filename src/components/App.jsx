@@ -27,16 +27,19 @@ class App extends Component {
     componentDidMount(){
         this.getVideo('dogs');
         this.getComments();
-        this.getReplies()
+        this.getReplies();
+       
+       
+        
         
 
     }
 
     setMount(){
-        this.addComment();
-        this.addReply();
         this.likes();
         this.dislikes();
+        this.addComment();
+        this.addReply();
     }
 
     changeVideo=(newVideoId)=>{
@@ -74,9 +77,13 @@ class App extends Component {
             comments: response.data
         });
     }
-    addComment = async (text) => {
-        let response = await axios.post('http://127.0.0.1:8000/youtube/', text)
+    addComment = async (newComment) => {
+        let response = await axios.post('http://127.0.0.1:8000/youtube/', newComment)
         this.getComments()
+        this.setState({
+            newComment: response.data
+        });
+        this.getComments();
     }
     
     getReplies = async () => {
@@ -111,7 +118,11 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId} title={this.state.title} description={this.state.description} />
+                <Comments newComment={this.addComment} />
+                <CommentTable comments={this.state.comments} like={this.likes} dislike={this.dislikes} />
                 <RelatedVideos videoId={this.state.videoId} relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
+                
+                
             </div>
          );
     }

@@ -13,7 +13,7 @@ class Comments extends Component {
          }
     }
 
-    handlesChanges = (event) => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -21,7 +21,7 @@ class Comments extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addNewComment(this.state)
+        this.props.newComment(this.state)
     }
 
 
@@ -29,7 +29,7 @@ class Comments extends Component {
     render() { 
         return ( 
             <form onSubmit={this.handleSubmit}>
-                <input type='text' name='comment' onChange={this.handlesChnages} />
+                <input name='comment' onChange={this.handleChange} value={this.state.comment}/>
                 <button type='submit'>Add Comment</button>
             </form>
          );

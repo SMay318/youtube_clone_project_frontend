@@ -7,11 +7,17 @@ function CommentTable(props){
             <table>
                 <tr>
                     <th>Comment</th>
+                    <th>Likes</th>
+                    <th>dislikes</th>
                 </tr>
                 {props.comments.map((comment) => {
                     return (
                         <tr>
                             <td>{comment.comment}</td>
+                            <td>{comment.likes}</td>
+                            <td><button onClick={() => props.like(comment)}>Like</button></td>
+                            <td>{comment.dislikes}</td>
+                            <td><button onClick={() => props.dislike(comment)}>Dislike</button></td>
                         </tr>
 
                     )

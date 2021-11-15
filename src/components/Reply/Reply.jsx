@@ -27,11 +27,10 @@ class Reply extends Component{
     render() {
         return(
             <div>
-                <h4>Reply</h4>
-                <form onSubmit= {this.handleSubmit} method= 'post'>
+                <form onSubmit= {this.handleSubmit}>
                     <div>
-                        <input text= "text" name= "text" onChange={this.handleChange} value= {this.state.text} />
-                        <button type="submit" className="searchButton">Reply Here</button>
+                        <input text= "text" name= "reply" onChange={this.handleChange} />
+                        <button type="submit" className="searchButton">Add Reply</button>
                     </div>
                 </form>
             </div>
