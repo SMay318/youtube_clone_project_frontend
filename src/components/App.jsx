@@ -43,7 +43,10 @@ class App extends Component {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedVideo=${VideoId}&part=snippet&type=video&key=${googleAPIKey}`)
         console.log(response.data)
         this.setState({
-            relatedVideos: response.data.items
+            relatedVideos: response.data.items,
+            title: response.data.items[0].snippet.title,
+            description: response.data.items[0].snippet.description
+
             
         })
     }
