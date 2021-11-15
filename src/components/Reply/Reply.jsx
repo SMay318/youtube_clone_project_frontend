@@ -4,7 +4,7 @@ class Reply extends Component{
     constructor(props){
         super(props)
         this.state = {
-
+           
            reply: '',
            comment_id: this.props.comment_pk
 

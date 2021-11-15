@@ -5,7 +5,7 @@ class Comments extends Component {
         super(props);
         this.state = { 
             comment: '',
-            videoId: '',
+            videoId: this.props.videoId,
             likes: 0,
             dislikes: 0
 
@@ -20,7 +20,9 @@ class Comments extends Component {
     }
 
     handleSubmit = (event) => {
+        console.log(this.props)
         event.preventDefault();
+        console.log(this.state)
         this.props.newComment(this.state)
     }
 

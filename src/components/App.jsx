@@ -78,6 +78,7 @@ class App extends Component {
         });
     }
     addComment = async (newComment) => {
+        console.log(newComment)
         let response = await axios.post('http://127.0.0.1:8000/youtube/', newComment)
         this.getComments()
         this.setState({
@@ -118,7 +119,7 @@ class App extends Component {
             <div>
                 <SearchBar getVideo={this.getVideo} />
                 <DisplayVideo videoId = {this.state.videoId} title={this.state.title} description={this.state.description} />
-                <Comments newComment={this.addComment} />
+                <Comments newComment={this.addComment} videoId={this.state.videoId}/>
                 <CommentTable comments={this.state.comments} like={this.likes} dislike={this.dislikes} />
                 <RelatedVideos videoId={this.state.videoId} relatedVideos={this.state.relatedVideos} changeVideo={this.changeVideo} />
                 
